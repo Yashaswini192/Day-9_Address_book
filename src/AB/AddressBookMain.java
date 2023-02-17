@@ -11,6 +11,7 @@ public class AddressBookMain {
 		System.out.println(addressbook.toString());
 		addressbook.updateContact();
 		System.out.println(addressbook.toString());
+		addressbook.deleteContact();
 	}
 
 }

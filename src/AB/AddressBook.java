@@ -1,5 +1,6 @@
 package AB;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class AddressBook {
@@ -84,8 +85,13 @@ public class AddressBook {
 	}
 	
 	public void deleteContact() {
-		System.out.println("enter name to delete contact:");
-		
+		Scanner scan = new Scanner(System.in);
+		System.out.println("enter Firstname to delete contact:");
+		String PersonName = scan.next();
+		if(c.getFirstName() == (c.getFirstName())) {
+			System.out.println("contact deleted");
+			return;
+		}
+	}
 	}
 
-}
