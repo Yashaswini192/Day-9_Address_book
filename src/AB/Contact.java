@@ -110,8 +110,9 @@ public class Contact {
 				+ "]";
 	}
 
+		
+	}
 
 
 
 
-}
