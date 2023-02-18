@@ -9,9 +9,12 @@ public class AddressBookMain {
 		AddressBook addressbook = new AddressBook();
 		addressbook.addContact();
 		System.out.println(addressbook.toString());
+
 		addressbook.updateContact();
 		System.out.println(addressbook.toString());
+
 		addressbook.deleteContact();
+		System.out.println(addressbook.toString());
 	}
 
 }
