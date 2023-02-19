@@ -5,8 +5,10 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class AddressBook {
-	ArrayList<Contact> address  = new ArrayList<>();
+	ArrayList<Contact> contactlistnum = new ArrayList<>();
+	
 	Contact c;
+	
 	public void addContact() {
 
 		Scanner sc = new Scanner(System.in);
@@ -29,27 +31,24 @@ public class AddressBook {
 		String Email = sc.next();
 
 
-		c = new Contact();
-		c.setFirstName(FirstName);
-		c.setSecondName(SecondName);
-		c.setAddress(Address);
-		c.setCity(City);
-		c.setState(State);
-		c.setZip(Zip);
-		c.setPhoneNumber(PhoneNumber);
-		c.setEmail(Email);
-
-
+		c = new Contact(FirstName,SecondName,Address,City, State,Zip,PhoneNumber,Email);
+		contactlistnum.add(c);
 	}
 
 	public String toString() {
 		return c.toString();
 	}
 
+	public void display() {
+		for(int i = 0; i < contactlistnum.size();i++ ) {
+			if( contactlistnum.get(i) != null) {
+				System.out.println(contactlistnum.get(i));
+			}
+		}
+	}
 
 	public void updateContact( ){
 
-		c = new Contact();
 		Scanner s = new Scanner(System.in);
 		System.out.println("enter first name to update details:");
 		String FirstName = s.nextLine();
@@ -83,7 +82,7 @@ public class AddressBook {
 		if(scan.next() == (c.getFirstName())) {
 			System.out.println("contact deleted");
 
-			c = new Contact();
+	
 			c.setFirstName(null);
 			c.setSecondName(null);
 			c.setAddress(null);

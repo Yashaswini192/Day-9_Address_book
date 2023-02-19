@@ -12,16 +12,17 @@ public class Contact {
 	private String email;
 
 
-	public void addContact(String FirstName, String SecondName, String Address, String City, String State, int Zip, Long PhoneNumber, String email) {
-		this.FirstName = FirstName;
-		this.SecondName = SecondName;
-		this.Address = Address;
-		this.City = City;
-		this.State = State;
-		this.Zip = Zip;
-		this.PhoneNumber = PhoneNumber;
+	public Contact(String firstName, String secondName, String address, String city, String state, int zip,
+			Long phoneNumber, String email) {
+		super();
+		FirstName = firstName;
+		SecondName = secondName;
+		Address = address;
+		City = city;
+		State = state;
+		Zip = zip;
+		PhoneNumber = phoneNumber;
 		this.email = email;
-
 	}
 
 	public String getFirstName() {
