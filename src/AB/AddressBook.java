@@ -205,7 +205,9 @@ public class AddressBook {
 				+ "\nTo Search person in a city or state press 5 "
 				+ "\n To get number of contacts searched by city or state press 6"
 				+"\n To get the contacts in alphabetical order press 7"
-				+ "\nTo close this Address book Enter 8");
+				+"\n To write into File press 8"
+				+"\n To read From File press 9"
+				+ "\nTo close this Address book Enter 10");
 		int check = sc.nextInt();
 		switch(check) {
 		case 1 : ArrayList<Contact> temp = addContact();
@@ -232,8 +234,13 @@ public class AddressBook {
 		case 7:
 			alphabeticalSort();
 			break;
-		
-		case 8 :
+		case 8:
+			writeIntoFile();
+			break;
+		case 9:
+			readFromFile();
+			break;
+		case 10 :
 			System.out.println("This Address book closed");
 			addressBookManagement();
 			break;
@@ -318,7 +325,27 @@ public class AddressBook {
 			System.out.println("Address book : "+key+"\nAfter Sorting Alphabetically : " +sortedList);
 		}
 	}
-}
+	
+	public void writeIntoFile() throws Exception{
+		BufferedWriter bw = new BufferedWriter(new FileWriter("D:\\Bridgelabz course\\Day9-AddressBook\\Addressbook.txt"));
+		for(Map.Entry<String,ArrayList>entry : multipleAddressBook.entrySet()){
+	        bw.write(entry.getKey() + ":" +entry.getValue());
+	    }
+	    bw.flush();
+	    bw.close();
+	    
+	}
+
+	public void readFromFile() throws Exception{
+		BufferedReader br = new BufferedReader(new FileReader("D:\\Bridgelabz course\\Day9-AddressBook\\Addressbook.txt"));
+		 String r;
+	        while(( r= br.readLine()) != null){
+	            System.out.println(r);
+	        }
+	        br.close();
+	    }
+	}
+
 	
 
 
