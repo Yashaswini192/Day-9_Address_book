@@ -193,7 +193,12 @@ public class AddressBook {
 
 		Scanner sc =  new Scanner(System.in);
 
-		System.out.println("\n\nTo Add new contact to Address book press 1 \nTo edit contact press 2 \nTo delete contact from address book press 3 \nTo check for duplicate contact in addressbook press 4 \nTo Search person in a city or state press 5 \nTo close this Address book Enter 6");
+		System.out.println("\n\nTo Add new contact to Address book press 1 "
+				+ "\nTo edit contact press 2 \nTo delete contact from address book press 3 "
+				+ "\nTo check for duplicate contact in addressbook press 4 "
+				+ "\nTo Search person in a city or state press 5 "
+				+ "\n To get number of contacts searched by city or state press 6"
+				+ "\nTo close this Address book Enter 7");
 		int check = sc.nextInt();
 		switch(check) {
 		case 1 : ArrayList<Contact> temp = addContact();
@@ -214,7 +219,10 @@ public class AddressBook {
 		case 5 : 
 			searchPersonInACityOrState();
 			break;
-		case 6 :
+		case 6:
+			countOfContacts();
+			break;
+		case 7 :
 			System.out.println("This Address book closed");
 			addressBookManagement();
 			break;
@@ -239,7 +247,7 @@ public class AddressBook {
 	}
 
 	public void searchPersonInACityOrState() {
-		
+
 		Scanner sc = new Scanner(System.in);		
 		System.out.println("1 : Search by city name \n2: Search by state name");
 		int option = sc.nextInt();
@@ -256,11 +264,36 @@ public class AddressBook {
 			System.out.println("Enter State:");
 			String state = sc.next();
 			for (String key : multipleAddressBook.keySet()) {
-				
+
 				ArrayList<Contact> temp = multipleAddressBook.get(key);
 				temp.stream().filter(a -> a.getState().equalsIgnoreCase(state)).forEach(y -> System.out.println("Address book Name : "+key + "\n"+y + "\n"));
 			}
 			break;
+		}
+	}
+
+	public void countOfContacts() {
+
+		Scanner sc = new Scanner(System.in);		
+		System.out.println("1 : Search by city name \n2: Search by state name");
+		int option1 = sc.nextInt();
+		switch (option1){
+		case 1 :
+			System.out.println("Enter city Name");
+			String city = sc.next();
+			for (String key : multipleAddressBook.keySet()) {
+				ArrayList<Contact> temp = multipleAddressBook.get(key);
+				System.out.println(temp.stream().filter(a -> a.getCity().equalsIgnoreCase(city)).count());
+			}
+			break;
+		case 2 :
+			System.out.println("Enter state Name");
+			String state = sc.next();
+			for (String key : multipleAddressBook.keySet()) {
+				ArrayList<Contact> temp = multipleAddressBook.get(key);
+				System.out.println(temp.stream().filter(a -> a.getState().equalsIgnoreCase(state)).count());
+			}
+			break;	
 		}
 	}
 }
