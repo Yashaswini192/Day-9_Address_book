@@ -1,20 +1,26 @@
 package AB;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBook {
 
 	HashMap<String,ArrayList> multipleAddressBook = new HashMap<>();
 
-	ArrayList<AddressBook> contactlistnum = new ArrayList<>();
+	//ArrayList<Contact> contactlistnum = new ArrayList<>();
 
 	Contact c;
-
 	public ArrayList<Contact> addContact() {
-		//AddressBook book;
+		
 		ArrayList<Contact> temp = new ArrayList<>();
 
 		Scanner sc = new Scanner(System.in);
@@ -45,7 +51,7 @@ public class AddressBook {
 		String Email = sc.next();
 
 
-		c = new Contact(FirstName,SecondName,Address,City, State,Zip,PhoneNumber,Email);
+		Contact c = new Contact(FirstName,SecondName,Address,City, State,Zip,PhoneNumber,Email);
 		temp.add(c);
 		return temp;
 	}
@@ -145,7 +151,7 @@ public class AddressBook {
 		multipleAddressBook.toString();
 	}
 
-	public void addressBookManagement(){
+	public void addressBookManagement() throws Exception{
 		System.out.println("To create new Address Book press 1\nTo Update Existing Address book press 2\nTo view Address book press 3\nTo close system press 4");
 		Scanner sc = new Scanner(System.in);
 		int num = sc.nextInt();
@@ -187,7 +193,7 @@ public class AddressBook {
 		}
 	}
 
-	private void contactManagement(String x) {
+	private void contactManagement(String x) throws Exception {
 		// TODO Auto-generated method stub
 		ArrayList l = multipleAddressBook.get(x);
 
@@ -198,7 +204,8 @@ public class AddressBook {
 				+ "\nTo check for duplicate contact in addressbook press 4 "
 				+ "\nTo Search person in a city or state press 5 "
 				+ "\n To get number of contacts searched by city or state press 6"
-				+ "\nTo close this Address book Enter 7");
+				+"\n To get the contacts in alphabetical order press 7"
+				+ "\nTo close this Address book Enter 8");
 		int check = sc.nextInt();
 		switch(check) {
 		case 1 : ArrayList<Contact> temp = addContact();
@@ -222,7 +229,11 @@ public class AddressBook {
 		case 6:
 			countOfContacts();
 			break;
-		case 7 :
+		case 7:
+			alphabeticalSort();
+			break;
+		
+		case 8 :
 			System.out.println("This Address book closed");
 			addressBookManagement();
 			break;
@@ -237,8 +248,6 @@ public class AddressBook {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter First Name:");
 		String firstName = sc.nextLine();
-
-		Iterator iterator = contactlistnum.iterator();
 
 		if(firstName.equals(c.getFirstName())) {
 			System.out.println("Contact is Already there in addressbook");
@@ -281,19 +290,35 @@ public class AddressBook {
 		case 1 :
 			System.out.println("Enter city Name");
 			String city = sc.next();
+			//try {
 			for (String key : multipleAddressBook.keySet()) {
-				ArrayList<Contact> temp = multipleAddressBook.get(key);
+				List<Contact> temp = multipleAddressBook.get(key);
+			//}
+			//catch(ClassCastException e) {
 				System.out.println(temp.stream().filter(a -> a.getCity().equalsIgnoreCase(city)).count());
+			//}
 			}
 			break;
 		case 2 :
 			System.out.println("Enter state Name");
 			String state = sc.next();
 			for (String key : multipleAddressBook.keySet()) {
-				ArrayList<Contact> temp = multipleAddressBook.get(key);
+				List<Contact> temp = multipleAddressBook.get(key);
 				System.out.println(temp.stream().filter(a -> a.getState().equalsIgnoreCase(state)).count());
 			}
 			break;	
 		}
 	}
+
+	public void alphabeticalSort(){
+
+		for (String key : multipleAddressBook.keySet()) {
+			List<Contact> temp = multipleAddressBook.get(key);
+			List sortedList = temp.stream().sorted((f, s)-> f.getFirstName().compareTo(s.getFirstName())).collect(Collectors.toList());
+			System.out.println("Address book : "+key+"\nAfter Sorting Alphabetically : " +sortedList);
+		}
+	}
 }
+	
+
+

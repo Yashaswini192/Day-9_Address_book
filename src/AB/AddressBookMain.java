@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class AddressBookMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		AddressBook addressbook = new AddressBook();
 
