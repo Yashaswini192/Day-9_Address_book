@@ -63,6 +63,7 @@ public class AddressBook {
 		return multipleAddressBook;
 	}
 
+
 	public void updateContact(ArrayList<AddressBook> x ){
 
 		Scanner s = new Scanner(System.in);
@@ -192,7 +193,7 @@ public class AddressBook {
 
 		Scanner sc =  new Scanner(System.in);
 
-		System.out.println("\n\nTo Add new contact to Address book press 1\nTo edit contact press 2\nTo delete contact from address book press 3\n To check for duplicate contact in addressbook press 4\nTo close this Address book Enter 5");
+		System.out.println("\n\nTo Add new contact to Address book press 1 \nTo edit contact press 2 \nTo delete contact from address book press 3 \nTo check for duplicate contact in addressbook press 4 \nTo Search person in a city or state press 5 \nTo close this Address book Enter 6");
 		int check = sc.nextInt();
 		switch(check) {
 		case 1 : ArrayList<Contact> temp = addContact();
@@ -210,7 +211,10 @@ public class AddressBook {
 		case 4 :
 			checkDuplicates();
 			break;
-		case 5 :
+		case 5 : 
+			searchPersonInACityOrState();
+			break;
+		case 6 :
 			System.out.println("This Address book closed");
 			addressBookManagement();
 			break;
@@ -234,17 +238,29 @@ public class AddressBook {
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+	public void searchPersonInACityOrState() {
+		
+		Scanner sc = new Scanner(System.in);		
+		System.out.println("1 : Search by city name \n2: Search by state name");
+		int option = sc.nextInt();
+		switch (option){
+		case 1 :
+			System.out.println("Enter city Name");
+			String city = sc.next();
+			for (String key : multipleAddressBook.keySet()) {
+				ArrayList<Contact> temp = multipleAddressBook.get(key);
+				temp.stream().filter(a -> a.getCity().equalsIgnoreCase(city)).forEach(y -> System.out.println("Address book Name : "+key + "\n"+y + "\n"));
+			}
+			break;
+		case 2 :
+			System.out.println("Enter State:");
+			String state = sc.next();
+			for (String key : multipleAddressBook.keySet()) {
+				
+				ArrayList<Contact> temp = multipleAddressBook.get(key);
+				temp.stream().filter(a -> a.getState().equalsIgnoreCase(state)).forEach(y -> System.out.println("Address book Name : "+key + "\n"+y + "\n"));
+			}
+			break;
+		}
+	}
 }
